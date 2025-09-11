@@ -105,5 +105,8 @@ public class AuthService : BaseService
 
         return false;
     }
-
+    public async Task LogoutAsync()
+    {
+        await _signInManager.SignOutAsync();
+    }
 }
