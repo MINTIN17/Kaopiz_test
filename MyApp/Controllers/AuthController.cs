@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.Model;
 using MyApp.Application.Services;
 using MyApp.Domain.Exceptions;
@@ -67,5 +68,13 @@ public class AuthController : Controller
         }
 
         return Ok(new { message = "Đăng ký thành công" });
+    }
+
+    [Authorize]
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.LogoutAsync();
+        return Ok(new { message = "Đăng xuất thành công" });
     }
 }
